@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties("storage")
 public class StorageProperties {
 
-    private String storageLocation = "pages";
+    private String storageLocation = "ext-res/pages";
 
     public String getStorageLocation() {
         return storageLocation;

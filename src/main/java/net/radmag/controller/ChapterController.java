@@ -2,6 +2,7 @@ package net.radmag.controller;
 
 import net.radmag.model.Chapter;
 import net.radmag.repository.ChapterRepository;
+import net.radmag.storage.SavePanelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,27 +22,14 @@ public class ChapterController {
     @Autowired
     private ChapterRepository chapterRepository;
 
+    @Autowired
+    private SavePanelService savePanelService;
+
     @RequestMapping(value = "chapters/{id}/upload", method = RequestMethod.POST)
     public String uploadPanel(@PathVariable Long id, @RequestParam("uploadfile") MultipartFile uploadfile) {
 
-        try {
-            // Get the filename and build the local file path (be sure that the
-            // application have write permissions on such directory)
-            String filename = uploadfile.getOriginalFilename();
-            String directory = "/chapters/" + id;
-            String filepath = directory + "/" + filename;
+        return savePanelService.store(uploadfile);
 
-            // Save the file locally
-            BufferedOutputStream stream =
-                    new BufferedOutputStream(new FileOutputStream(new File(filepath)));
-            stream.write(uploadfile.getBytes());
-            stream.close();
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        return "uploaded";
     }
 
     @RequestMapping(value = "chapters", method = RequestMethod.GET)
