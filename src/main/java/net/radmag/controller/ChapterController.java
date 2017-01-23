@@ -4,7 +4,11 @@ import net.radmag.model.Chapter;
 import net.radmag.repository.ChapterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
 /**
@@ -16,6 +20,29 @@ public class ChapterController {
 
     @Autowired
     private ChapterRepository chapterRepository;
+
+    @RequestMapping(value = "chapters/{id}/upload", method = RequestMethod.POST)
+    public String uploadPanel(@PathVariable Long id, @RequestParam("uploadfile") MultipartFile uploadfile) {
+
+        try {
+            // Get the filename and build the local file path (be sure that the
+            // application have write permissions on such directory)
+            String filename = uploadfile.getOriginalFilename();
+            String directory = "/chapters/" + id;
+            String filepath = directory + "/" + filename;
+
+            // Save the file locally
+            BufferedOutputStream stream =
+                    new BufferedOutputStream(new FileOutputStream(new File(filepath)));
+            stream.write(uploadfile.getBytes());
+            stream.close();
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return "uploaded";
+    }
 
     @RequestMapping(value = "chapters", method = RequestMethod.GET)
     public List<Chapter> list() {
