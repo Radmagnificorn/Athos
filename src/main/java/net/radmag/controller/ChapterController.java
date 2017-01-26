@@ -25,10 +25,10 @@ public class ChapterController {
     @Autowired
     private SavePanelService savePanelService;
 
-    @RequestMapping(value = "chapters/{id}/upload", method = RequestMethod.POST)
+    @RequestMapping(value = "chapters/{id}/new_page", method = RequestMethod.POST)
     public String uploadPanel(@PathVariable Long id, @RequestParam("uploadfile") MultipartFile uploadfile) {
-
-        return savePanelService.store(uploadfile);
+        String chapterPath = chapterRepository.findOne(id).getPath();
+        return savePanelService.store(uploadfile, chapterPath);
 
     }
 

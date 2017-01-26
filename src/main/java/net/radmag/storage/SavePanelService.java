@@ -23,7 +23,7 @@ public class SavePanelService {
         this.rootLocation = Paths.get(storage.getStorageLocation());
     }
 
-    public String store(MultipartFile file) {
+    public String store(MultipartFile file, String chapterPath) {
 
         String fullPath;
         try {
@@ -31,7 +31,8 @@ public class SavePanelService {
                 throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
             }
             fullPath = this.rootLocation.resolve(file.getOriginalFilename()).toString();
-            Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
+            Files.createDirectories(this.rootLocation.resolve(chapterPath));
+            Files.copy(file.getInputStream(), this.rootLocation.resolve(chapterPath).resolve(file.getOriginalFilename()));
         } catch (IOException e) {
             throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
         }

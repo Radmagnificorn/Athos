@@ -12,12 +12,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 public class StaticResourceConfiguration extends WebMvcConfigurerAdapter {
 
+    private static final String[] RESOURCE_LOCATIONS = {
+            "file:ext-res/",
+            "classpath:/resources/",
+            "classpath:/static/"
+    };
+
     @Autowired
     private StorageProperties storageProperties;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         super.addResourceHandlers(registry);
-        registry.addResourceHandler("/**").addResourceLocations(String.format("file:ext-res/"));
+        registry.addResourceHandler("/**").addResourceLocations(RESOURCE_LOCATIONS);
     }
 }
