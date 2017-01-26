@@ -1,0 +1,36 @@
+{
+  "name": "nav",
+  "version": "1.0.0",
+  "description": "",
+  "main": "nav.js",
+  "scripts": {
+    "build": "webpack",
+    "run": "webpack-dev-server",
+    "test": "mocha --reporter progress buildScripts/testSetup.js \"App/**/*.test.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Radmagnificorn/comnav.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Radmagnificorn/comnav/issues"
+  },
+  "homepage": "https://github.com/Radmagnificorn/comnav#readme",
+  "devDependencies": {
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-env": "^1.1.8",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2"
+  },
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "whatwg-fetch": "^2.0.2"
+  }
+}

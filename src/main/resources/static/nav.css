@@ -1,0 +1,24 @@
+body {
+    background-color: #000000;
+}
+
+#comicPanel {
+    height: 720px;
+    width: 960px;
+    background-color: #eeeeee;
+    margin: 0 auto;
+}
+
+#navPanel {
+    width: 250px;
+    margin: 0 auto;
+}
+
+#navPanel input {
+    width: 30px;
+}
+
+#navPanel button {
+    width: 100px;
+}
+
