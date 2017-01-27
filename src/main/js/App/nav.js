@@ -1,4 +1,5 @@
 "use strict";
+import './nav.css';
 
 import PageManager from './PageManager.js';
 import DisplayControl from './DisplayControl.js';

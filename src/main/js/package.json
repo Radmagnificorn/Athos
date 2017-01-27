@@ -4,19 +4,12 @@
   "description": "",
   "main": "nav.js",
   "scripts": {
-    "build": "webpack",
+    "dev-build": "webpack --config webpack.config.dev.js",
     "test": "mocha --reporter progress buildScripts/testSetup.js \"App/**/*.test.js\""
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Radmagnificorn/comnav.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Radmagnificorn/comnav/issues"
-  },
   "homepage": "https://github.com/Radmagnificorn/comnav#readme",
   "devDependencies": {
     "babel-core": "^6.21.0",

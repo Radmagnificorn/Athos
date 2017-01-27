@@ -9,7 +9,7 @@ module.exports = {
     },
     target: "web",
     output: {
-        path: "../resources/static",
+        path: "../../../ext-res",
         publicPath: "/",
         filename: "[name].js"
     },

@@ -4,7 +4,7 @@ export default class PageComponent extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="page">
                 <img src={this.props.imgSrc}/>
                 <div className="order-arrows">
                     <div className="up-arrow">^</div>
