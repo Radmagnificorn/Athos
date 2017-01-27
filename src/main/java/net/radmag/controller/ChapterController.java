@@ -44,7 +44,7 @@ public class ChapterController {
 
     @RequestMapping(value = "chapters/{id}", method = RequestMethod.GET)
     public Chapter get(@PathVariable Long id) {
-        return ChapterStub.findOne(id);
+        return chapterRepository.findOne(id);
     }
 
     @RequestMapping(value = "chapters/{id}", method = RequestMethod.PUT)
@@ -55,8 +55,8 @@ public class ChapterController {
     }
 
     @RequestMapping(value = "chapters/{id}", method = RequestMethod.DELETE)
-    public static Chapter delete(@PathVariable Long id){
-        return ChapterStub.delete(id);
+    public void delete(@PathVariable Long id){
+        chapterRepository.delete(id);
     }
 
 }

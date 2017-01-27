@@ -1,3 +1,5 @@
+import 'whatwg-fetch';
+
 export default class Utils {
     constructor() {}
 
@@ -19,6 +21,12 @@ export default class Utils {
             };
 
             request.send();
+        });
+    }
+
+    static loadChapter(chapterId) {
+        fetch("/chapters/" + chapterId).then(response => {
+            response.text().then()
         });
     }
 

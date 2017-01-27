@@ -1,13 +1,31 @@
+
 module.exports = {
-    entry: "./App/nav.js",
+    debug: true,
+    devtool: 'inline-source-map',
+    noInfo: false,
+    entry: {
+        player: "./App/nav.js",
+        admin: "./AdminPanel/admin.jsx"
+    },
+    target: "web",
     output: {
         path: "../resources/static",
-        publicPath: "assets",
-        filename: "bundle.js"
+        publicPath: "/",
+        filename: "[name].js"
     },
     module: {
         loaders: [
-            {test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"}
+            {
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                loader: "babel-loader",
+                query: {
+                    presets: ['react']
+                }
+            },
+            {
+                test: /\.css$/, loaders: ['style', 'css']
+            }
         ]
     }
 }
