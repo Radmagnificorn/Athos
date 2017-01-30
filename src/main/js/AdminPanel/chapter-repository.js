@@ -22,4 +22,18 @@ export default class ChapterRepository {
     static fetchJson(url) {
         return fetch(url).then(response => response.json());
     }
+
+    static savePage(chapterId, file) {
+        let formData = new FormData();
+
+        formData.append('uploadfile', file);
+
+        return fetch(this.baseUrl + chapterId + '/new_page', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json, */*'
+            }
+        });
+    }
 }
