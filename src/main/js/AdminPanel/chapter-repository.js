@@ -36,4 +36,11 @@ export default class ChapterRepository {
             }
         });
     }
+
+    static saveChapter(chapter) {
+        return fetch(this.baseUrl, {
+            method: 'POST',
+            body: chapter.stringify
+        });
+    }
 }

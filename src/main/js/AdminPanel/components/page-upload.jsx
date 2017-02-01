@@ -1,5 +1,5 @@
 import React from 'react';
-import ChapterRepository from './chapter-repository.js';
+import ChapterRepository from '../chapter-repository.js';
 
 export default class PageUpload extends React.Component {
 

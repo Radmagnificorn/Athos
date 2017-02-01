@@ -19,11 +19,15 @@ import java.util.List;
 @RestController
 public class ChapterController {
 
-    @Autowired
-    private ChapterRepository chapterRepository;
+    private final ChapterRepository chapterRepository;
+
+    private final SavePanelService savePanelService;
 
     @Autowired
-    private SavePanelService savePanelService;
+    public ChapterController(ChapterRepository chapterRepository, SavePanelService savePanelService) {
+        this.chapterRepository = chapterRepository;
+        this.savePanelService = savePanelService;
+    }
 
     @RequestMapping(value = "chapters/{id}/new_page", method = RequestMethod.POST)
     public String uploadPanel(@PathVariable Long id, @RequestParam("uploadfile") MultipartFile uploadfile) {
