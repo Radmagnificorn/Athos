@@ -12,6 +12,7 @@ public interface SavePanelService {
 
     void delete(String chapterPath, String fileName);
     void delete(String chapterPath, List<String> fileNames);
+    void delete(String chapterPath);
 
     void init();
 }

@@ -21,7 +21,7 @@ export default class PageComponent extends React.Component {
     }
 
     _handleDelete(event) {
-        ChapterRepository
+
     }
 
 }

@@ -16,7 +16,7 @@ export default class PageUpload extends React.Component {
     _handleSubmit(event){
         event.preventDefault();
         ChapterRepository.savePage(this.props.chapter, this.fileInput.files[0]).then((response) => {
-            this.props.callback();
+            this.props.refreshParent();
         });
     }
 }

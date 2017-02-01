@@ -69,6 +69,8 @@ public class ChapterController {
 
     @RequestMapping(value = "chapters/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable Long id){
+        Chapter chapter = chapterRepository.findOne(id);
+        savePanelService.delete(chapter.getPath());
         chapterRepository.delete(id);
     }
 

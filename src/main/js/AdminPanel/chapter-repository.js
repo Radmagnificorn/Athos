@@ -43,9 +43,17 @@ export default class ChapterRepository {
         let saveMethod = chapter.id ? 'PUT' : 'POST';
 
         return fetch(this.baseUrl, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
             method: saveMethod,
-            body: chapter.stringify
+            body: JSON.stringify(chapter)
         });
+    }
+
+    static deleteChapter(id) {
+        return fetch(this.baseUrl + id, {method: 'DELETE'});
     }
 
 }

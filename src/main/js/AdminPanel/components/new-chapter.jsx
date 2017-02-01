@@ -9,7 +9,8 @@ export default class NewChapter extends React.Component {
             showForm: false,
             form: {
                 chapterName: '',
-                path: ''
+                path: '',
+                chapters: []
             }
         };
     }
@@ -48,11 +49,13 @@ export default class NewChapter extends React.Component {
 
     _handleChange(event) {
 
-        const name = event.name;
+        const name = event.target.name;
         const value = event.target.value;
 
         this.setState({
-            [name]: value
+            form: {
+                [name]: value
+            }
         });
     }
 
@@ -60,6 +63,8 @@ export default class NewChapter extends React.Component {
         event.preventDefault();
 
 
-        ChapterRepository.saveChapter(this.state.form);
+        ChapterRepository.saveChapter(this.state.form).then((result) => {
+            this.props.refreshParent();
+        });
     }
 }

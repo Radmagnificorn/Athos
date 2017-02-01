@@ -15,18 +15,22 @@ export default class ChapterSelector extends React.Component {
     render() {
         return (
             <div>
-                <NewChapter />
+                <NewChapter refreshParent={this._fetchChapters.bind(this)} />
                 {this._getChapters()}
             </div>
         );
     }
 
     _getChapters() {
-        return this.state.chapters.map(chapter => <ChapterComponent id={chapter.id}/>);
+        return this.state.chapters.map(chapter => <ChapterComponent chapter={chapter} refreshParent={this._fetchChapters.bind(this)}/>);
     }
 
 
     componentDidMount() {
+        this._fetchChapters();
+    }
+
+    _fetchChapters() {
         ChapterRepository.findAll().then(chapters => this.setState({chapters: chapters}));
     }
 }

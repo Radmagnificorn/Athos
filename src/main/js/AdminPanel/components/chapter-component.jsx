@@ -7,18 +7,6 @@ export default class ChapterComponent extends React.Component {
     constructor() {
         super();
 
-        this.state = {
-            selected: false,
-            chapter: {
-                name: "",
-                pages: [],
-                path: ""
-            }
-        };
-    }
-
-    componentDidMount() {
-        this._fetchChapter();
     }
 
     render(){
@@ -28,22 +16,23 @@ export default class ChapterComponent extends React.Component {
     _getChapterPanel() {
         return (
             <div className="chapter">
-                <h1>{this.state.chapter.name}</h1>
-                <PageUpload chapter={this.state.chapter.id} callback={this._fetchChapter.bind(this)}/>
+                <h1>{this.props.chapter.name}</h1>
+                <PageUpload chapter={this.props.chapter.id} refreshParent={this.props.refreshParent}/>
+                <button onClick={this._deleteChapter.bind(this)}>Delete</button>
                 <div>{this._getPages()}</div>
             </div>
         );
     }
 
     _getPages() {
-        return this.state.chapter.pages.map(
-            (page) => <PageComponent imgSrc={"pages/" + this.state.chapter.path + "/" + page}/>
+        return this.props.chapter.pages.map(
+            (page) => <PageComponent imgSrc={"pages/" + this.props.chapter.path + "/" + page}/>
         );
     }
 
-    _fetchChapter() {
-        ChapterRepository.find(this.props.id).then((chapter) => {
-            this.setState({chapter: chapter});
+    _deleteChapter(event) {
+        ChapterRepository.deleteChapter(this.props.chapter.id).then((result) => {
+            this.props.refreshParent();
         });
     }
 }
