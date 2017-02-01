@@ -1,4 +1,4 @@
-import './admin.css';
+import './admin.less';
 import 'whatwg-fetch';
 
 import React from 'react';

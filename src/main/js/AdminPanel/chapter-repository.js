@@ -38,9 +38,14 @@ export default class ChapterRepository {
     }
 
     static saveChapter(chapter) {
+
+        // if no id call create route instead of update
+        let saveMethod = chapter.id ? 'PUT' : 'POST';
+
         return fetch(this.baseUrl, {
-            method: 'POST',
+            method: saveMethod,
             body: chapter.stringify
         });
     }
+
 }

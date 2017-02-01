@@ -1,5 +1,6 @@
 package net.radmag.controller;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import net.radmag.model.Chapter;
 import net.radmag.repository.ChapterRepository;
 import net.radmag.storage.SavePanelService;
@@ -10,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -56,13 +58,24 @@ public class ChapterController {
     @RequestMapping(value = "chapters/{id}", method = RequestMethod.PUT)
     public Chapter update(@PathVariable Long id, @RequestBody Chapter chapter)
     {
+        Chapter origChapter = chapterRepository.findOne(id);
         chapter.setId(id);
+
+        //TODO: handle changing path
+
+        savePanelService.delete(origChapter.getPath(), diffRemoved(origChapter.getPages(), chapter.getPages()));
         return chapterRepository.saveAndFlush(chapter);
     }
 
     @RequestMapping(value = "chapters/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable Long id){
         chapterRepository.delete(id);
+    }
+
+    protected static List<String> diffRemoved(List<String> original, List<String> updated) {
+        List<String> removed = new ArrayList<>(original);
+        removed.removeAll(updated);
+        return removed;
     }
 
 }
