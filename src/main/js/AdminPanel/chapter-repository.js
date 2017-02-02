@@ -39,6 +39,8 @@ export default class ChapterRepository {
 
     static saveChapter(chapter) {
 
+        chapter.name = chapter.title || chapter.name;
+
         // if no id call create route instead of update
         let saveMethod = chapter.id ? 'PUT' : 'POST';
 

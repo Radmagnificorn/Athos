@@ -7,11 +7,8 @@ export default class NewChapter extends React.Component {
         super();
         this.state = {
             showForm: false,
-            form: {
-                name: '',
-                path: '',
-                chapters: []
-            }
+            title: '',
+            path: ''
         };
     }
 
@@ -35,12 +32,12 @@ export default class NewChapter extends React.Component {
         return (
             <form onSubmit={this._addChapter.bind(this)} onChange={this._handleChange.bind(this)}>
                 <div>
-                    <label htmlFor="name">Title</label>
-                    <input type="text" value={this.state.form.name} name="name" />
+                    <label htmlFor="title">Title</label>
+                    <input type="text" value={this.state.title} name="title" />
                 </div>
                 <div>
                     <label htmlFor="path">Path</label>
-                    <input type="text" value={this.state.form.path} name="path" />
+                    <input type="text" value={this.state.path} name="path" />
                 </div>
                 <button type="submit">Add</button>
             </form>
@@ -53,17 +50,18 @@ export default class NewChapter extends React.Component {
         const value = event.target.value;
 
         this.setState({
-            form: {
-                [name]: value
-            }
+            [name]: value
         });
     }
 
     _addChapter(event) {
         event.preventDefault();
 
-
-        ChapterRepository.saveChapter(this.state.form).then((result) => {
+        ChapterRepository.saveChapter({
+            name: this.state.title,
+            path: this.state.path,
+            chapters: []
+        }).then((result) => {
             this.props.refreshParent();
         });
     }
