@@ -8,7 +8,7 @@ export default class NewChapter extends React.Component {
         this.state = {
             showForm: false,
             form: {
-                chapterName: '',
+                name: '',
                 path: '',
                 chapters: []
             }
@@ -36,7 +36,7 @@ export default class NewChapter extends React.Component {
             <form onSubmit={this._addChapter.bind(this)} onChange={this._handleChange.bind(this)}>
                 <div>
                     <label htmlFor="name">Title</label>
-                    <input type="text" value={this.state.form.name} name="chapterName" />
+                    <input type="text" value={this.state.form.name} name="name" />
                 </div>
                 <div>
                     <label htmlFor="path">Path</label>

@@ -26,6 +26,10 @@ module.exports = {
             { test: /\.css$/, loaders: ['style', 'css'] },
             { test: /\.less$/, loader: "style!css!less" }
         ]
+    },
+    externals: {
+        'react': 'React',
+        'react-dom': 'ReactDOM'
     }
 }
 
