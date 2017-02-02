@@ -25,8 +25,8 @@ export default class Utils {
     }
 
     static loadChapter(chapterId) {
-        fetch("/chapters/" + chapterId).then(response => {
-            response.text().then()
+        return fetch("/chapters/" + chapterId).then(response => {
+            return response.json();
         });
     }
 

@@ -1,11 +1,13 @@
 import Utils from './Utils.js';
 
 export default class PageManager {
-    constructor(baseDir, chapterUrl, pageNo) {
+    constructor(baseDir, chapterId, pageNo) {
         this.baseDir = baseDir;
-        this.pageDir = chapterUrl ? chapterUrl : '';
-        this.currentPage = pageNo ? pageNo : 0;
-        this.loadChapter(this.pageDir, pageNo);
+        this.currentPage = pageNo;
+        this.loadChapter(chapterId, this.currentPage);
+        this.chapter = {
+            pages: []
+        }
     }
 
     addRenderer(displayRenderer) {
@@ -21,12 +23,12 @@ export default class PageManager {
     }
 
     next() {
-        if (this.currentPage < this.pages.length-1) {
+        if (this.currentPage < this.chapter.pages.length-1) {
             this.currentPage++;
             this.render();
         } else {
-            if (this.nextChapter) {
-                this.loadChapter(this.nextChapter, 'first');
+            if (this.chapter.nextChapter) {
+                this.loadChapter(this.chapter.nextChapter, 'first');
             }
         }
         return this.getPageUrl();
@@ -47,20 +49,23 @@ export default class PageManager {
     pushCurrentState() {
         history.pushState(
             {
-                chapter: this.pageDir,
+                chapter: this.chapter.path,
                 page: this.currentPage
             },
             null,
-            `#${this.pageDir}~${this.currentPage}`
+            `#${this.chapter.path}~${this.currentPage}`
         );
     }
 
-    loadChapter(chapterUrl, page) {
-        Utils.loadChapterManifest(this.baseDir + "/" + chapterUrl).then((manifest) => {
+    loadChapter(chapterId, page) {
+        Utils.loadChapter(this.baseDir + "/" + chapterId).then((chapter) => {
+            this.chapter = chapter;
+            /*
             this.pageDir = chapterUrl;
             this.nextChapter = manifest.nextChapter;
             this.prevChapter = manifest.prevChapter;
             this.pages = manifest.pages;
+            */
 
             let pageInt = parseInt(page);
             if (pageInt) {
@@ -83,11 +88,11 @@ export default class PageManager {
     }
 
     getChapterPath() {
-        return this.baseDir + "/" + this.pageDir ;
+        return this.baseDir;
     }
 
     getPageUrl() {
-        return this.getChapterPath() + "/" + this.pages[this.currentPage];
+        return this.chapter.path + "/" + this.chapter.pages[this.currentPage];
     }
 
 }

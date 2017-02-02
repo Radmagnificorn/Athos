@@ -21,7 +21,7 @@ import Utils from './Utils.js';
     let startPage = Utils.getPageFromUrl(window.location.href) || {chapter: 'chapter1', page: 0};
 
     let displayControl = new DisplayControl(comicPanel, dispProps);
-    let pageManager = new PageManager('./pages', startPage.chapter, startPage.page);
+    let pageManager = new PageManager('./chapters', startPage.chapter, startPage.page);
 
     pageManager.addRenderer(displayControl);
 

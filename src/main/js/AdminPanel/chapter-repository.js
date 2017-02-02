@@ -43,8 +43,9 @@ export default class ChapterRepository {
 
         // if no id call create route instead of update
         let saveMethod = chapter.id ? 'PUT' : 'POST';
+        let optionalId = chapter.id || '';
 
-        return fetch(this.baseUrl, {
+        return fetch(this.baseUrl + optionalId, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'

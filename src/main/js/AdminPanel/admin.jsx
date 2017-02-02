@@ -14,7 +14,3 @@ let sp = document.getElementById('secondPanel');
 
 
 ReactDOM.render(<ChapterSelector/>, mp);
-
-ReactDOM.render(<PageUpload/>, sp);
-
-ChapterRepository.find(2).then(chapter => alert("name: " + chapter.name));
