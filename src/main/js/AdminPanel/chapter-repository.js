@@ -12,15 +12,15 @@ export default class ChapterRepository {
     }
 
     static find(id) {
-        return this.fetchJson(this.baseUrl + id);
+        return this.fetchJson(this.baseUrl + id, {credentials: 'include'});
     }
 
     static findAll() {
-        return this.fetchJson(this.baseUrl);
+        return this.fetchJson(this.baseUrl, {credentials: 'include'});
     }
 
     static fetchJson(url) {
-        return fetch(url).then(response => response.json());
+        return fetch(url, {credentials: 'include'}).then(response => response.json());
     }
 
     static savePage(chapterId, file) {
@@ -33,7 +33,8 @@ export default class ChapterRepository {
             body: formData,
             headers: {
                 'Accept': 'application/json, */*'
-            }
+            },
+            credentials: 'include'
         });
     }
 
@@ -51,12 +52,13 @@ export default class ChapterRepository {
                 'Content-Type': 'application/json'
             },
             method: saveMethod,
-            body: JSON.stringify(chapter)
+            body: JSON.stringify(chapter),
+            credentials: 'include'
         });
     }
 
     static deleteChapter(id) {
-        return fetch(this.baseUrl + id, {method: 'DELETE'});
+        return fetch(this.baseUrl + id, {method: 'DELETE', credentials: 'include'});
     }
 
 }
